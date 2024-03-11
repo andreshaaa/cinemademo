@@ -1,13 +1,13 @@
 package com.cinema.cinemademo.movie;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,16 +16,19 @@ import lombok.Setter;
 public class DailyEvent {
 
 
+    private UUID id;
 
-    private Integer dailyId;
+    private LocalDateTime event_time;
 
-    private String dailyMovieName;
+    private Integer movie_id;
 
-    private String dailyAgeLimit;
+    private String movieName;
 
-    private String dailyDuration;
+    private String movieAgeLimit;
 
-    private String dailyLanguage;
+    private String duration;
 
-    private String dailyStartTime;
+    private String language;
+
+    private List<String> genre;
 }

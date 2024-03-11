@@ -10,7 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Booking {
-    private String seatNr;
-    private String vacancy;
+    private Integer seatNo;
 
-}
+    private boolean occupied;
+
+
+    }
+
