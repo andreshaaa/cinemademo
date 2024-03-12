@@ -20,5 +20,7 @@ public class BookingUser {
     private String who_watched;
     @Column
     private Integer last_movie_seen;
+    @Column
+    private String last_movie_time;
 
 }

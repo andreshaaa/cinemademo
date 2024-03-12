@@ -5,8 +5,7 @@ import java.util.UUID;
 public record BookingDto(
 
         UUID uuid,
-        Integer[] selectedSeat,
-        String mName,
+        Integer[] selectedSeats,
         String username
 ) {
 }

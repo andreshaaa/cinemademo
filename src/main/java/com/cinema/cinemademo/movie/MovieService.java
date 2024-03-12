@@ -31,6 +31,7 @@ public class MovieService {
         this.weeklyCalendarRepository = weeklyCalendarRepository;
     }
 
+    // finding a movie from movie repository
 
     public Movie getMovieById(Integer id) {
         Optional<Movie> movie = this.movieRepository.findById(id);
@@ -42,7 +43,7 @@ public class MovieService {
     }
 
 
-
+    //
     public List <String> getGenreByMovieId(Integer movieId) {
 
         List<Genre> genreList = genreRepository.findAll();
@@ -84,7 +85,7 @@ public class MovieService {
 
         return genres;
     }
-
+    // filtering weekly movie list through selected language filter
     public List <DailyEvent> weeklyByLanguage (List<DailyEvent> searchList, String selectedLanguage) {
 
 
@@ -97,6 +98,7 @@ public class MovieService {
                 }
             }  return listToSend;
     }
+    // collecting all movies from the weekly movie repository
     public List <DailyEvent> allWeek () {
         List <WeeklyCalendar> allEvents = weeklyCalendarRepository.findAll();
         List <DailyEvent> returnList = new ArrayList<>();
@@ -116,7 +118,7 @@ public class MovieService {
     }
 
 
-
+    // compiling the weekly movie list. Depending on filters.
     public List <DailyEvent> weeklyCalendar (String language, String genre, String userName, String rating, String time) {
 
 
@@ -153,7 +155,7 @@ public class MovieService {
         }
 
         return returnList;
-
+    // checking if user is present for the recommendation.
     }
     private Boolean isUserPresent (String user) {
 
@@ -166,7 +168,7 @@ public class MovieService {
 
         } return false;
     }
-
+    // // filtering weekly movie list through selected age rating filter
     private List<DailyEvent> weekByRating(List<DailyEvent> searchList, String selectedPrefs) {
 
         String u = "U";
@@ -194,7 +196,7 @@ public class MovieService {
 
         return listToSend;
     }
-
+    // filtering weekly movie list through selected start time filter
     public List <DailyEvent> weeklyByDay (List<DailyEvent> searchList, String searchWord) {
 
         List <DailyEvent> listToSend = new ArrayList<>();
@@ -207,6 +209,8 @@ public class MovieService {
         }
         return listToSend;
     }
+
+    // filtering weekly movie list through selected genre filter
     public List <DailyEvent> weekByGenre (List<DailyEvent> searchList, String searchWord) {
 
         List <DailyEvent> listToSend = new ArrayList<>();
@@ -221,7 +225,8 @@ public class MovieService {
 
         return listToSend;
     }
-
+    // Recommending movies. Is user has watched any movies previously,
+    // recommending movies based on genre and start time of the last movie user watched.
     public List<DailyEvent> recommendMovies (List<DailyEvent> searchList, String user) {
 
         List <DailyEvent> listToSend = new ArrayList<>();
@@ -229,11 +234,13 @@ public class MovieService {
         List<BookingUser> l =  bookingRepository.findAll();
 
         int movSeen = 0;
+        String movTime = null;
 
         for(BookingUser b : l) {
 
             if (b.getWho_watched().equals(user)) {
                 movSeen = b.getLast_movie_seen();
+                movTime = b.getLast_movie_time();
             }
         }
 
@@ -242,11 +249,13 @@ public class MovieService {
 
         for (DailyEvent d : searchList) {
             if(movSeen==0) { return allWeek();}
-            if (getGenreByMovieId(d.getMovie_id()).contains(genre.get(1))){
-                listToSend.add(d);
+            if (getGenreByMovieId(d.getMovie_id()).contains(genre.getFirst())){
+                listToSend.add(d);}
 
-            }
-        } return listToSend;
+        }
+
+       listToSend = weeklyByDay(listToSend, movTime+0);
+        return listToSend;
 
     }
 

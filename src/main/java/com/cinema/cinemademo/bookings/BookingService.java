@@ -33,7 +33,7 @@ public class BookingService {
         this.movieService = movieService;
     }
 
-    // cinema occupancy depending on screening time
+    // cinema occupancy calc depending on screening time
     public double cinemaCapacity(double time) {
         double normal = 0;
 
@@ -62,6 +62,7 @@ public class BookingService {
 
     // using UUID from frontend to find screening time from db
     public Double getBookingTime(UUID uuid) {
+
         LocalDateTime dateTime = null;
         double time;
 
@@ -79,7 +80,7 @@ public class BookingService {
 
         return time;
     }
-
+    // finding movie screening time from repository
     public LocalDateTime getMovieTime(UUID uuid) {
         LocalDateTime dateTime = null;
         for (WeeklyCalendar w : weeklyCalendarRepository.findAll()) {
@@ -92,6 +93,23 @@ public class BookingService {
         return dateTime;
     }
 
+    public Integer getMovieId(UUID uuid) {
+        int id = 0;
+        for (WeeklyCalendar w : weeklyCalendarRepository.findAll()) {
+
+            if (uuid.equals(w.getId())) {
+                id = w.getMovie_id();
+
+            }
+        } return id;
+
+
+
+    }
+
+
+
+    // finding movie name from repository
     public String screeningMovieName(UUID uuid) {
         String movieName = null;
         for (WeeklyCalendar w : weeklyCalendarRepository.findAll()) {
@@ -109,6 +127,7 @@ public class BookingService {
     // calculating cinema occupancy. Taking into account screening time (later times are more occupied).
     // Also taking into account center seats which are more likely to be occupied.
     public SeatMap bookSeats(UUID uuid) {
+
         String movieName = screeningMovieName(uuid);
         Double time = getBookingTime(uuid);
         LocalDateTime movieTime = getMovieTime(uuid);
@@ -129,28 +148,26 @@ public class BookingService {
         return new SeatMap(uuid, movieTime, movieName, seatList);
     }
 
-    // returning data from front
+    // returning and saving and/or if user is present, updating booking data from frontend
     public void saveBooking(BookingDto bookingDto) {
+        Integer[] seats = bookingDto.selectedSeats();
+        /* right now we do not save purchased seats,
+         as seatmap occupancy is generated randomly */
 
-        Integer movieSeen = null;
+
         String userFromDb = null;
+        String movTime = String.valueOf(getBookingTime(bookingDto.uuid()));
 
+        if(bookingDto.username() != null) {
 
-
-            for (WeeklyCalendar w : weeklyCalendarRepository.findAll()) {
-
-                if (bookingDto.uuid().equals(w.getId())) {
-                    movieSeen = w.getMovie_id();
-                    break;
-                }
-            }
 
 
             for (BookingUser u : bookingRepository.findAll()) {
 
                 if (bookingDto.username().equals(u.getWho_watched())) {
                     userFromDb = u.getWho_watched();
-                    bookingRepository.update(u.getId(), movieSeen, bookingDto.username());
+
+                    bookingRepository.update(u.getId(), getMovieId(bookingDto.uuid()), bookingDto.username(), movTime);
                 }
 
             }
@@ -158,7 +175,8 @@ public class BookingService {
             if (userFromDb == null) {
                 BookingUser b = new BookingUser();
                 b.setWho_watched(bookingDto.username());
-                b.setLast_movie_seen(1);
+                b.setLast_movie_seen(getMovieId(bookingDto.uuid()));
+                b.setLast_movie_time(movTime);
 
                 try {
                     this.bookingRepository.save(b);
@@ -166,10 +184,8 @@ public class BookingService {
                     throw new ResponseStatusException(HttpStatus.CONFLICT);
                 }
             }
-
         }
 
-
-
+    }
 
 }
