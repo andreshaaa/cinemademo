@@ -29,11 +29,4 @@ public class Movie {
 
 
 
-   // public String getMoviename() {return moviename;}
-
-   // public String getAgelimit() {return agelimit;}
-
-   // public String getDuration() {return duration;}
-
-   // public String getLanguage() {return language;}
 }

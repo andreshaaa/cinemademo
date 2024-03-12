@@ -4,6 +4,7 @@ CREATE TABLE "weeklycalendar" (
                  "event_time" TIMESTAMP NOT NULL,
                  "movie_id" INTEGER NOT NULL
 
+
 );
 INSERT INTO "weeklycalendar" ("event_time", "movie_id") VALUES
                     ('2024-03-18 15:00:00', '24'),

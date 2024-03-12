@@ -147,13 +147,11 @@ public class BookingService {
         }
         return new SeatMap(uuid, movieTime, movieName, seatList);
     }
-
     // returning and saving and/or if user is present, updating booking data from frontend
     public void saveBooking(BookingDto bookingDto) {
         Integer[] seats = bookingDto.selectedSeats();
         /* right now we do not save purchased seats,
          as seatmap occupancy is generated randomly */
-
 
         String userFromDb = null;
         String movTime = String.valueOf(getBookingTime(bookingDto.uuid()));

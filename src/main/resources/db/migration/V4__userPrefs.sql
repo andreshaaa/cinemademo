@@ -6,6 +6,7 @@ CREATE TABLE "bookinguser" (
         "last_movie_seen" INTEGER NOT NULL,
          "last_movie_time" VARCHAR(255) NOT NULL
 
+
 );
 
 

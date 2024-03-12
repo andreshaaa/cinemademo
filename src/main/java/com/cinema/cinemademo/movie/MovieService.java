@@ -197,6 +197,7 @@ public class MovieService {
         return listToSend;
     }
     // filtering weekly movie list through selected start time filter
+
     public List <DailyEvent> weeklyByDay (List<DailyEvent> searchList, String searchWord) {
 
         List <DailyEvent> listToSend = new ArrayList<>();
@@ -243,7 +244,6 @@ public class MovieService {
                 movTime = b.getLast_movie_time();
             }
         }
-
 
        List <String> genre = getGenreByMovieId(movSeen);
 

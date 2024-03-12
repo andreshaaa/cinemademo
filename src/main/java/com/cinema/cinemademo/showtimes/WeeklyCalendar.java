@@ -23,5 +23,4 @@ public class WeeklyCalendar {
     @Column
     private Integer movie_id;
 
-
 }

@@ -1,5 +1,4 @@
 package com.cinema.cinemademo.bookings;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(name = "bookinguser")
 public class BookingUser {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)

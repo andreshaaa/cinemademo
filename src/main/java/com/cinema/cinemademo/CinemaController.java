@@ -28,7 +28,6 @@ public class CinemaController {
     }
 
 
-
     @GetMapping("/weeklycalendar/")
     public List<DailyEvent> getMovieByWeekday(@RequestParam(name="language", required = false, defaultValue="all-movies") String language,
                                               @RequestParam(name="genre", required = false, defaultValue="all-movies") String genre,

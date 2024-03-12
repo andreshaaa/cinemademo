@@ -15,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class SeatMap {
 
+
         private UUID id;
 
         private LocalDateTime startTime;
