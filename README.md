@@ -26,8 +26,7 @@ Kindlamini tundsin ennast Java ja Springiga toimetades. Seal ei olnud vaja kuigi
 
 Ajakulu – ca nädal. Mõned päev pikemad, mõned lühemad. Backend valmis kiiremini aga vajas aegajalt kohendamist. Frontendis oli palju avastamist ja ajakulu, ning ühes selle avastamisega oli tihti tarvis ka backendis ja andmebaasides erinevaid muudatusi teha. 
 
-“Kui aega jääb üle” asju teha ei jõudnud. Sõidan 13. märtsil välisreisile ja seega oli mul ülesande tegemise tähtaeg lähemalt kui teie poolt võimaldatu.  Aga, et ülesanne oli põnev, ehitan äppi kindlasti edasi. 
-Raskusi valmistas ka istekohtade soovitamise lisamine. Ka see jääb tuleviku tarbeks. Praegu peab külastaja kohavalikuga ise hakkama saama.  Ei jõudnud lisada kasutaja autentimist. Mõistagi ei saa reaalelus sellisel moel kasutajat autentida.
+Ei jõudnud lisada kasutaja autentimist. Mõistagi ei saa reaalelus sellisel moel kasutajat autentida.
 
 Samuti ei pööranud erilist tähelepanu rakenduse välimusele. Keskendusin sellele, et asi toimiks.
 
